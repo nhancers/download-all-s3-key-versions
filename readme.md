@@ -8,7 +8,7 @@ Downloads all the versions of the given key
 
 * Run
 
-    *sudo python3 download-s3-file.py -b "{{s3  bucket  name}}" -k "{{s3  key}}* 
+    ```sudo python3 download-s3-file.py -b "{{s3  bucket  name}}" -k "{{s3  key}}```
 
 	Parameters:
 
