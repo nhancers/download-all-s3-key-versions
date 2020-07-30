@@ -14,7 +14,7 @@ reqs = [str(ir.req) for ir in install_reqs]
 setup(
    name='download-s3-file-versions',
    version='1.0',
-   description='utility to download all s3 versions of s3 key.',
+   description='Utility to download all s3 versions of s3 key.',
    author='Chandan Mahajan',
    author_email='mahajan.chandan18@gmail.com',
    packages=['.'],  #same as name
