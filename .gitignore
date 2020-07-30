@@ -1,1 +1,4 @@
-s3_files
+build
+dist
+output
+download_s3_file_versions.egg-info

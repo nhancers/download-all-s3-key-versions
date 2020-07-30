@@ -1,21 +1,25 @@
 
-# Description
+##	Description
+---
 
-Downloads all the versions of the given key
+Utility to download all version of s3 file. 
 
-##  Usage  
-* Generate token for the environment.
-
+##	Usage  
+---
 * Run
 
-    ```sudo python3 download-s3-file.py -b "{{s3  bucket  name}}" -k "{{s3  key}}```
+    ```shell
+	python3 download-s3-file.py -b "{{s3  bucket  name}}" -k "{{s3  key}}" -o "{{output folder path}}"
+	```
 
 	Parameters:
-
-		-b : S3 bucket name.
-
-		-k : S3 key.
+	```
+	-b : S3 bucket name.
+	-k : S3 key.
+	-o : output folder path where downloaded files will be stored. (optional) 
+	```
 
 ## Sample
-
-    sudo python3 download-s3-file.py -b "prod-mp-gateway-store" -k "prod/SSB-direct-import/DirectCloudSSBHoldings.csv"
+```shell
+python3 download-s3-file.py -b "my-bucket" -k "filename.txt"
+```

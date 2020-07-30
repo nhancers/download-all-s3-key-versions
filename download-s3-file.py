@@ -7,46 +7,57 @@ import os
 from datetime import datetime
 
 def usage():
-    print("Please check readme for usage")
+    print("Please check readme for usage.")
 
 def main():
-    session = boto3.Session(profile_name='default')
-    s3Client = session.client('s3')
-    i = 0
+    profile_name = 'default'
+    session = boto3.Session(profile_name=profile_name)
+    s3_client = session.client('s3')
 
-    outputFolderPath = './s3_files/' + str(datetime.now().date())
-    key = ""
-    bucketName = ""
+    key = ''
+    bucket_name = ''
+    
+    path_separator = os.path.sep
+    output_folder_path = '.'+path_separator+'output'+path_separator + str(datetime.now())
     
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "b:k:", [])
+        opts, args = getopt.getopt(sys.argv[1:], "b:k:o:", [])
     except getopt.GetoptError as err:
-        # print help information and exit:
-        print(err) # will print something like "option -a not recognized"
+        # Print help information and exit:
+        print(err) # Will print something like "option -a not recognized."
         usage()
         sys.exit(2)
 
-    for o, a in opts:
+    for o, opt_val in opts:
         if o in ("-b", "--bucket"):
-            bucketName = a
+            bucket_name = opt_val
         elif o in ("-k", "--key"):
-            key = a
+            key = opt_val
+        elif o in ("-o","--output_folder"):
+            output_folder_path = opt_val
         else:
-            assert False, "unhandled option"
-    print("BucketName:" + bucketName)
+            assert False, "unhandled option."
+    print("BucketName:" + bucket_name)
     print("Key:" + key)
     
-    versions = s3Client.list_object_versions(Bucket=bucketName, Prefix=key)
+    versions = s3_client.list_object_versions(Bucket=bucket_name, Prefix=key)
 
-    if not os.path.exists(outputFolderPath):
-        os.makedirs(outputFolderPath)
-    print(outputFolderPath)
+    if not os.path.exists(output_folder_path):
+        os.makedirs(output_folder_path)
+    print(output_folder_path)
 
-    for obj in versions.get('Versions'):
+    i = 0
+    head, file_name = os.path.split(key)
+
+    for obj in versions.get('Versions') or []:
         i = i+1
-        s3Client.download_file(bucketName, key, outputFolderPath + "/" + str(obj.get('LastModified').date().isoformat())+".csv", ExtraArgs={"VersionId": obj.get('VersionId')})
-
-    print("Total Files" + str(i))
+        version_id = ''
+        if obj.get('VersionId') != 'null':
+            version_id = obj.get('VersionId')
+        output_file = output_folder_path + path_separator + str(obj.get('LastModified').date().isoformat())+ "_" + version_id + file_name
+        s3_client.download_file(bucket_name, key, output_file, ExtraArgs={"VersionId": obj.get('VersionId')})
+    
+    print("Total Files: " + str(i))
 
 if __name__ == "__main__":
     main()
