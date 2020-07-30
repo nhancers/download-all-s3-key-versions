@@ -4,7 +4,7 @@
 Utility to download all version of s3 file. 
 
 ##	Usage  
-    ```shell
+	```shell
 	python3 download-s3-file.py -b "{{s3  bucket  name}}" -k "{{s3  key}}" -o "{{output folder path}}"
 	```
 
