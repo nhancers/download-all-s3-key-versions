@@ -11,12 +11,19 @@ install_reqs = parse_requirements('requirements.txt', session=PipSession())
 
 reqs = [str(ir.req) for ir in install_reqs]
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
    name='download-s3-file-versions',
-   version='1.0',
+   version='1.4',
    description='Utility to download all s3 versions of s3 key.',
    author='Chandan Mahajan',
    author_email='mahajan.chandan18@gmail.com',
    packages=['.'],  #same as name
    install_requires=reqs, #external packages as dependencies
-)
+   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
+   long_description=long_description,
+   long_description_content_type="text/markdown",
+   keywords = ['aws s3', 'download s3 key versions'],   # Keywords that define your package best
+   python_requires='>=3.6')
