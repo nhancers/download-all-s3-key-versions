@@ -15,15 +15,21 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-   name='download-s3-file-versions',
-   version='1.4',
+   name='downloads3key',
+   version='1.8',
    description='Utility to download all s3 versions of s3 key.',
    author='Chandan Mahajan',
    author_email='mahajan.chandan18@gmail.com',
-   packages=['.'],  #same as name
+   packages=['downloads3key'],  #same as name
    install_requires=reqs, #external packages as dependencies
    license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
    long_description=long_description,
    long_description_content_type="text/markdown",
    keywords = ['aws s3', 'download s3 key versions'],   # Keywords that define your package best
-   python_requires='>=3.6')
+   python_requires='>=3.6',
+   entry_points={
+          'console_scripts': [
+              'downloads3key = downloads3key.__main__:main'
+          ]
+      }
+)

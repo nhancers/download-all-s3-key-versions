@@ -1,15 +1,19 @@
+#!/usr/bin/env python3
+
+from typing import Any
 import boto3
 import sys
 import getopt
 import os
 from datetime import datetime
+from typing import Any
 
 
 def usage():
     print("Please check readme for usage.")
 
 
-def main():
+def main() -> Any:
     profile_name = 'default'
     session = boto3.Session(profile_name=profile_name)
     s3_client = session.client('s3')
@@ -26,7 +30,7 @@ def main():
         # Print help information and exit:
         print(err)  # Will print something like "option -a not recognized."
         usage()
-        sys.exit(2)
+        return 0
 
     for o, opt_val in opts:
         if o in ("-b", "--bucket"):
@@ -62,4 +66,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

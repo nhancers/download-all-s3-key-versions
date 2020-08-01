@@ -19,3 +19,5 @@ Parameters:
 ```shell
 python3 download-s3-file.py -b "my-bucket" -k "filename.txt"
 ```
+
+pypi-AgEIcHlwaS5vcmcCJGUzODA2OTMyLTUyY2MtNDBmNy05MmI3LTkxNDcyYTEyNDliMgACSnsicGVybWlzc2lvbnMiOiB7InByb2plY3RzIjogWyJkb3dubG9hZC1zMy1maWxlLXZlcnNpb25zIl19LCAidmVyc2lvbiI6IDF9AAAGIKixOpnCOxW0M9FVvvzxraWBsTxmJfc7c0FbxmOKftVZ
