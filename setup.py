@@ -16,7 +16,7 @@ with open("README.md", "r") as fh:
 
 setup(
    name='downloads3key',
-   version='1.8',
+   version='1.9',
    description='Utility to download all s3 versions of s3 key.',
    author='Chandan Mahajan',
    author_email='mahajan.chandan18@gmail.com',
