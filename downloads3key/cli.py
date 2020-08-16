@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 import click
 import json
-from s3transfer import __version__
+from downloads3key import __version__
 
 def print_info(ctx, param, value):
     if not value or ctx.resilient_parsing:
