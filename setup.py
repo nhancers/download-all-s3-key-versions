@@ -1,5 +1,6 @@
 import io
 import os
+import re
 from setuptools import setup, find_packages
 
 
@@ -18,9 +19,13 @@ def read_requirements():
     # Strip commented lines.
     return [line for line in content.split(os.linesep) if not line.strip().startswith("#")]
 
+def read_version():
+    content = read(os.path.join(os.path.dirname(__file__), "downloads3key", "__init__.py"))
+    return re.search(r"__version__ = \"([^']+)\"", content).group(1)
+
 setup(
    name='downloads3key',
-   version='2.6',
+   version=read_version(),
    description='Utility to download all s3 versions of s3 key.',
    author='Chandan Mahajan',
    author_email='mahajan.chandan18@gmail.com',

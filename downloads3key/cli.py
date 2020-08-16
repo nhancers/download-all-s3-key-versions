@@ -2,10 +2,20 @@ import boto3
 import os
 from datetime import datetime
 import click
+import json
+from s3transfer import __version__
+
+def print_info(ctx, param, value):
+    if not value or ctx.resilient_parsing:
+        return
+    click.echo(json.dumps({"version": __version__}, indent=2))
+    ctx.exit()
 
 @click.command()
-@click.option('--bucket', '-b', required=True, help='Bucket name.')
+@click.option('--bucket', '-b', required=True, help='Bucket name.', type=None)
 @click.option('--key', '-k', required=True, help='Key.')
+@click.version_option(version=__version__, prog_name="Download s3 key cli.")
+@click.option("--info", is_flag=True, is_eager=True, callback=print_info, expose_value=False)
 def download(bucket, key):
     profile_name = 'default'
     session = boto3.Session()
